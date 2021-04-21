@@ -1,0 +1,64 @@
+﻿<Window x:Class="DemoHost.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="450" Width="800"
+        WindowStyle="SingleBorderWindow"
+        WindowState="Normal">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/DemoStyles;component/AllStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" IsLocked="True" IsManipulationEnabled="False" Background="White">
+            <ToolBar BorderThickness="1" Background="White">
+                <Button Command="{Binding OpenFolder}" Content="Open..." Margin="5"/>
+                <Button Command="{Binding Export}" Content="Export"/>
+            </ToolBar>
+        </ToolBarTray>
+
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+            <TextBlock Text="Selected folder:" Margin="10,0,5,0" Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Bottom"/>
+            <TextBlock Text="{Binding SelectedFolderPath}" Margin="0,0,5,1" VerticalAlignment="Bottom"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="4" Grid.Column="0" IsTextSearchEnabled="False" Focusable="True" Margin="10,0"
+                  x:Name="DT_Items" SelectionUnit="FullRow" SelectionMode="Extended"
+                  ItemsSource="{Binding FileItemsList, Mode=TwoWay, NotifyOnTargetUpdated=True}" FocusVisualStyle="{x:Null}"
+                  SelectedItem="{Binding SelectedFileItem, Mode=TwoWay, NotifyOnTargetUpdated=True}"
+                  EnableRowVirtualization="True" VirtualizingStackPanel.VirtualizationMode="Standard" VirtualizingPanel.ScrollUnit="Item"
+                  AutoGenerateColumns="False" GridLinesVisibility="None" HeadersVisibility="Column" CanUserResizeRows="False" 
+                  IsReadOnly="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                  BorderBrush="{StaticResource CharcoalGreyBrush}" BorderThickness="1" Background="{StaticResource GreenBackgroundBrush}" Height="300">
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Background" Value="{StaticResource GreenBackgroundBrush}"/>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="IsReadOnly" Binding="{Binding IsReadOnly}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="CreationTime" Binding="{Binding CreationTime, StringFormat=HH:mm\, dd.MM}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="LastAccessTime" Binding="{Binding LastAccessTime, StringFormat=HH:mm\, dd.MM}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <ContentControl Grid.Row="4" Grid.Column="1" Content="{Binding PluginPanel}" />
+    </Grid>
+</Window>

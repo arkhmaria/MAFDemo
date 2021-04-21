@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="ExportPlugin.PanelUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Width="200" Height="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/DemoStyles;component/AllStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border BorderBrush="{StaticResource GreenBorderBrush}" BorderThickness="1" Background="{StaticResource GreenBackgroundBrush}">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="15"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="1" Style="{StaticResource HeaderTextStyle}">Export plugin</TextBlock>
+            <TextBlock Grid.Row="3" Text="{Binding FileNameText}" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="5" Text="{Binding StatusText}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button Grid.Row="7" Command="{Binding OpenFile}" IsEnabled="{Binding IsOpenEnabled}" Content="Open converted file"
+                HorizontalAlignment="Center" Background="{StaticResource ButtonBackgroundBrush}" Padding="5" Foreground="White"/>
+        </Grid>
+    </Border>
+</UserControl>

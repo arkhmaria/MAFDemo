@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <SolidColorBrush x:Key="GreenBorderBrush" Color="#008831"/>
+    <SolidColorBrush x:Key="GreenBackgroundBrush" Color="#B9E8B9"/>
+    <SolidColorBrush x:Key="CharcoalGreyBrush" Color="#484d51"/>
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#357340"/>
+
+</ResourceDictionary>
